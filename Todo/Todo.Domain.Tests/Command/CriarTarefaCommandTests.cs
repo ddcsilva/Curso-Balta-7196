@@ -9,20 +9,25 @@ namespace Todo.Domain.Tests.Command
     {
         // Red, Green, Refactor
 
+        private readonly CriarTarefaCommand _comandoInvalido = new CriarTarefaCommand("", DateTime.Now, "");
+        private readonly CriarTarefaCommand _comandoValido = new CriarTarefaCommand("Título da Tarefa", DateTime.Now, "andrebaltieri");
+
+        public CriarTarefaCommandTests()
+        {
+            _comandoValido.Validate();
+            _comandoInvalido.Validate();
+        }
+
         [TestMethod]
         public void Dado_Um_Comando_Invalido()
         {
-            var command = new CriarTarefaCommand("", DateTime.Now, "");
-            command.Validate();
-            Assert.AreEqual(command.Valid, false);
+            Assert.AreEqual(_comandoInvalido.Valid, false);
         }
 
         [TestMethod]
         public void Dado_Um_Comando_Valido()
         {
-            var command = new CriarTarefaCommand("Título da Tarefa", DateTime.Now, "Danilo Silva");
-            command.Validate();
-            Assert.AreEqual(command.Valid, true);
+            Assert.AreEqual(_comandoValido.Valid, true);
         }
     }
 }
