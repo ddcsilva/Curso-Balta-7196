@@ -5,11 +5,11 @@ using Todo.Domain.Commands.Contracts;
 
 namespace Todo.Domain.Commands
 {
-    public class MarcarComoConcluidoCommand : Notifiable, ICommand
+    public abstract class MarcarTarefaCommand : Notifiable, ICommand
     {
-        public MarcarComoConcluidoCommand() { }
+        public MarcarTarefaCommand() { }
 
-        public MarcarComoConcluidoCommand(Guid id, string usuario)
+        public MarcarTarefaCommand(Guid id, string usuario)
         {
             Id = id;
             Usuario = usuario;
