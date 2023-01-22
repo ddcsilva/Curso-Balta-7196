@@ -17,7 +17,10 @@ namespace Todo.Domain.Handlers
 
         public ICommandResult Handle(CriarTarefaCommand command)
         {
-            
+            // Fail Fast Validation
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
         }
     }
 }
