@@ -5,11 +5,11 @@ using Todo.Domain.Commands.Contracts;
 
 namespace Todo.Domain.Commands
 {
-    public class CreateCommandTodo : Notifiable, ICommand
+    public class CriarTarefaCommand : Notifiable, ICommand
     {
-        public CreateCommandTodo() { }
+        public CriarTarefaCommand() { }
 
-        public CreateCommandTodo(string titulo, DateTime data, string usuario)
+        public CriarTarefaCommand(string titulo, DateTime data, string usuario)
         {
             Titulo = titulo;
             Data = data;
