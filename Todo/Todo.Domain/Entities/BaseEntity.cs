@@ -4,7 +4,7 @@ namespace Todo.Domain.Entities
 {
     public abstract class BaseEntity : IEquatable<BaseEntity>
     {
-        public BaseEntity(Guid id)
+        public BaseEntity()
         {
             Id = Guid.NewGuid();
         }
