@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Todo.Domain.Entities;
 using Todo.Domain.Infra.Contexts;
+using Todo.Domain.Queries;
 using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Infra.Repositories
@@ -35,7 +37,10 @@ namespace Todo.Domain.Infra.Repositories
 
         public IEnumerable<Tarefa> RetornarTodas(string usuario)
         {
-            throw new NotImplementedException();
+            return _context.Tarefas
+                .AsNoTracking()
+                .Where(TodoQueries.RetornarTodas(usuario))
+                .OrderBy(x => x.Data);
         }
 
         public IEnumerable<Tarefa> RetornarTodasConcluidas(string usuario)
