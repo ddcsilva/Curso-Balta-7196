@@ -11,7 +11,7 @@ namespace Todo.Domain.Tests.HandlerTests
     {
         private readonly CriarTarefaCommand _comandoInvalido = new CriarTarefaCommand("", DateTime.Now, "");
         private readonly CriarTarefaCommand _comandoValido = new CriarTarefaCommand("Título da Tarefa", DateTime.Now, "danilosilva");
-        private readonly TodoHandler _handler = new TodoHandler(new FakeTodoRepository());
+        private readonly TarefaHandler _handler = new TarefaHandler(new FakeTarefaRepository());
         private GenericCommandResult _result = new GenericCommandResult();
 
         [TestMethod]

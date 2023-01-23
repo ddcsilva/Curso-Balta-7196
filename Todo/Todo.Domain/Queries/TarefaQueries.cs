@@ -4,7 +4,7 @@ using Todo.Domain.Entities;
 
 namespace Todo.Domain.Queries
 {
-    public static class TodoQueries
+    public static class TarefaQueries
     {
         public static Expression<Func<Tarefa, bool>> RetornarTodas(string usuario)
         {

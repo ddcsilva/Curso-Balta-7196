@@ -26,8 +26,8 @@ namespace Todo.Domain.Api
 
             services.AddDbContext<DataContext>(option => option.UseInMemoryDatabase("Database"));
 
-            services.AddTransient<ITodoRepository, TodoRepository>();
-            services.AddTransient<TodoHandler, TodoHandler>();
+            services.AddTransient<ITarefaRepository, TodoRepository>();
+            services.AddTransient<TarefaHandler, TarefaHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

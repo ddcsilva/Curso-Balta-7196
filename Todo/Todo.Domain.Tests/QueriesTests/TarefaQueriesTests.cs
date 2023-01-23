@@ -8,11 +8,11 @@ using Todo.Domain.Queries;
 namespace Todo.Domain.Tests.QueriesTests
 {
     [TestClass]
-    public class TodoQueriesTests
+    public class TarefaQueriesTests
     {
         private List<Tarefa> _tarefas;
 
-        public TodoQueriesTests()
+        public TarefaQueriesTests()
         {
             _tarefas = new List<Tarefa>();
             _tarefas.Add(new Tarefa("Tarefa 1", DateTime.Now, "usuarioA"));
@@ -25,7 +25,7 @@ namespace Todo.Domain.Tests.QueriesTests
         [TestMethod]
         public void Dada_A_Consulta_Deve_Retornar_Tarefas_Apenas_Do_Usuario_danilosilva()
         {
-            var result = _tarefas.AsQueryable().Where(TodoQueries.RetornarTodas("danilosilva"));
+            var result = _tarefas.AsQueryable().Where(TarefaQueries.RetornarTodas("danilosilva"));
             Assert.AreEqual(2, result.Count());
         }
     }

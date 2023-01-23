@@ -9,7 +9,7 @@ using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Infra.Repositories
 {
-    public class TodoRepository : ITodoRepository
+    public class TodoRepository : ITarefaRepository
     {
         private readonly DataContext _context;
 
@@ -39,7 +39,7 @@ namespace Todo.Domain.Infra.Repositories
         {
             return _context.Tarefas
                 .AsNoTracking()
-                .Where(TodoQueries.RetornarTodas(usuario))
+                .Where(TarefaQueries.RetornarTodas(usuario))
                 .OrderBy(x => x.Data);
         }
 

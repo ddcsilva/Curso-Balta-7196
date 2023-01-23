@@ -4,7 +4,7 @@ using Todo.Domain.Entities;
 
 namespace Todo.Domain.Repositories
 {
-    public interface ITodoRepository
+    public interface ITarefaRepository
     {
         void Inserir(Tarefa tarefa);
         void Atualizar(Tarefa tarefa);

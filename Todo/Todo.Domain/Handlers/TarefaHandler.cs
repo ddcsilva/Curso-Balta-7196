@@ -7,11 +7,11 @@ using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Handlers
 {
-    public class TodoHandler : Notifiable, IHandler<CriarTarefaCommand>, IHandler<AtualizarTarefaCommand>, IHandler<MarcarComoConcluidaCommand>, IHandler<MarcarComoNaoConcluidaCommand>
+    public class TarefaHandler : Notifiable, IHandler<CriarTarefaCommand>, IHandler<AtualizarTarefaCommand>, IHandler<MarcarComoConcluidaCommand>, IHandler<MarcarComoNaoConcluidaCommand>
     {
-        private readonly ITodoRepository _repository;
+        private readonly ITarefaRepository _repository;
 
-        public TodoHandler(ITodoRepository repository)
+        public TarefaHandler(ITarefaRepository repository)
         {
             _repository = repository;
         }
@@ -41,16 +41,16 @@ namespace Todo.Domain.Handlers
                 return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
             // Recupera a Tarefa (Reidratação)
-            var todo = _repository.BuscarPorId(command.Id, command.Usuario);
+            var tarefa = _repository.BuscarPorId(command.Id, command.Usuario);
 
             // Altera o título
-            todo.AtualizarTitulo(command.Titulo);
+            tarefa.AtualizarTitulo(command.Titulo);
 
             // Atualiza no banco
-            _repository.Atualizar(todo);
+            _repository.Atualizar(tarefa);
 
             // Retorna o resultado
-            return new GenericCommandResult(true, "Tarefa atualizada", todo);
+            return new GenericCommandResult(true, "Tarefa atualizada", tarefa);
         }
 
         public ICommandResult Handle(MarcarComoConcluidaCommand command)
@@ -61,16 +61,16 @@ namespace Todo.Domain.Handlers
                 return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
             // Recupera o TodoItem
-            var todo = _repository.BuscarPorId(command.Id, command.Usuario);
+            var tarefa = _repository.BuscarPorId(command.Id, command.Usuario);
 
             // Altera o estado
-            todo.MarcarComoConcluido();
+            tarefa.MarcarComoConcluido();
 
             // Salva no banco
-            _repository.Atualizar(todo);
+            _repository.Atualizar(tarefa);
 
             // Retorna o resultado
-            return new GenericCommandResult(true, "Tarefa atualizada", todo);
+            return new GenericCommandResult(true, "Tarefa atualizada", tarefa);
         }
 
         public ICommandResult Handle(MarcarComoNaoConcluidaCommand command)
@@ -81,16 +81,16 @@ namespace Todo.Domain.Handlers
                 return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
             // Recupera o TodoItem
-            var todo = _repository.BuscarPorId(command.Id, command.Usuario);
+            var tarefa = _repository.BuscarPorId(command.Id, command.Usuario);
 
             // Altera o estado
-            todo.MarcarComoConcluido();
+            tarefa.MarcarComoConcluido();
 
             // Salva no banco
-            _repository.Atualizar(todo);
+            _repository.Atualizar(tarefa);
 
             // Retorna o resultado
-            return new GenericCommandResult(true, "Tarefa atualizada", todo);
+            return new GenericCommandResult(true, "Tarefa atualizada", tarefa);
         }
     }
 }
