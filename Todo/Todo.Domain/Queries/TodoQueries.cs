@@ -6,22 +6,22 @@ namespace Todo.Domain.Queries
 {
     public static class TodoQueries
     {
-        public static Expression<Func<Tarefa, bool>> RetornarTodasTarefas(string usuario)
+        public static Expression<Func<Tarefa, bool>> RetornarTodas(string usuario)
         {
             return x => x.Usuario == usuario;
         }
 
-        public static Expression<Func<Tarefa, bool>> RetornarTodasTarefasConcluidas(string usuario)
+        public static Expression<Func<Tarefa, bool>> RetornarTodasConcluidas(string usuario)
         {
             return x => x.Usuario == usuario && x.Concluido == true;
         }
 
-        public static Expression<Func<Tarefa, bool>> RetornarTodasTarefasNaoConcluidas(string usuario)
+        public static Expression<Func<Tarefa, bool>> RetornarTodasNaoConcluidas(string usuario)
         {
             return x => x.Usuario == usuario && x.Concluido == false;
         }
 
-        public static Expression<Func<Tarefa, bool>> RetornarTodasTarefasPorPeriodo(string usuario, DateTime data, bool concluido)
+        public static Expression<Func<Tarefa, bool>> RetornarTodasPorPeriodo(string usuario, DateTime data, bool concluido)
         {
             return x =>
                 x.Usuario == usuario &&

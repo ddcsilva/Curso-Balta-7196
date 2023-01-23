@@ -25,7 +25,7 @@ namespace Todo.Domain.Tests.QueriesTests
         [TestMethod]
         public void Dada_A_Consulta_Deve_Retornar_Tarefas_Apenas_Do_Usuario_danilosilva()
         {
-            var result = _tarefas.AsQueryable().Where(TodoQueries.RetornarTodasTarefas("danilosilva"));
+            var result = _tarefas.AsQueryable().Where(TodoQueries.RetornarTodas("danilosilva"));
             Assert.AreEqual(2, result.Count());
         }
     }
