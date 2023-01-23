@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Todo.Domain.Commands;
+using Todo.Domain.Entities;
 using Todo.Domain.Handlers;
+using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Api.Controllers
 {
@@ -9,11 +13,15 @@ namespace Todo.Domain.Api.Controllers
     public class TodoController : ControllerBase
     {
         [Route("")]
+        [HttpGet]
+        public IEnumerable<Tarefa> RetornarTodasTarefas([FromServices] ITarefaRepository repository)
+        {
+            return repository.RetornarTodas("danilosilva");
+        }
+
+        [Route("")]
         [HttpPost]
-        public GenericCommandResult CriarTarefa(
-            [FromBody] CriarTarefaCommand command,
-            [FromServices] TarefaHandler handler
-        )
+        public GenericCommandResult CriarTarefa([FromBody] CriarTarefaCommand command, [FromServices] TarefaHandler handler)
         {
             command.Usuario = "danilosilva";
             return (GenericCommandResult)handler.Handle(command);
