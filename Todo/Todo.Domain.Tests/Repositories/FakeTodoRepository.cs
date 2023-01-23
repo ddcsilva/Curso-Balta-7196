@@ -1,6 +1,7 @@
 ﻿using System;
 using Todo.Domain.Entities;
 using Todo.Domain.Repositories;
+using Todo.Domain.Tests.EntityTests;
 
 namespace Todo.Domain.Tests.Repositories
 {
@@ -14,6 +15,11 @@ namespace Todo.Domain.Tests.Repositories
         public void Atualizar(Tarefa tarefa)
         {
 
+        }
+
+        public Tarefa BuscarPorId(Guid id, string usuario)
+        {
+            return new Tarefa("Título da Tarefa", DateTime.Now, "danilosilva");
         }
     }
 }

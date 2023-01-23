@@ -1,4 +1,5 @@
-﻿using Todo.Domain.Entities;
+﻿using System;
+using Todo.Domain.Entities;
 
 namespace Todo.Domain.Repositories
 {
@@ -6,5 +7,6 @@ namespace Todo.Domain.Repositories
     {
         void Inserir(Tarefa tarefa);
         void Atualizar(Tarefa tarefa);
+        Tarefa BuscarPorId(Guid id, string usuario);
     }
 }
