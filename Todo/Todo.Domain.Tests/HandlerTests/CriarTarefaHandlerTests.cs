@@ -9,18 +9,23 @@ namespace Todo.Domain.Tests.HandlerTests
     [TestClass]
     public class CriarTarefaHandlerTests
     {
+        private readonly CriarTarefaCommand _comandoInvalido = new CriarTarefaCommand("", DateTime.Now, "");
+        private readonly CriarTarefaCommand _comandoValido = new CriarTarefaCommand("Título da Tarefa", DateTime.Now, "danilosilva");
+        private readonly TodoHandler _handler = new TodoHandler(new FakeTodoRepository());
+        private GenericCommandResult _result = new GenericCommandResult();
+
         [TestMethod]
         public void Dado_Um_Comando_Invalido_Deve_Interromper_A_Execucao()
         {
-            var command = new CriarTarefaCommand("", DateTime.Now, "");
-            var handler = new TodoHandler(new FakeTodoRepository());
-            Assert.Fail();
+            _result = (GenericCommandResult)_handler.Handle(_comandoInvalido);
+            Assert.AreEqual(_result.Success, false);
         }
 
         [TestMethod]
         public void Dado_Um_Comando_Valido_Deve_Criar_A_Tarefa()
         {
-            Assert.Fail();
+            _result = (GenericCommandResult)_handler.Handle(_comandoValido);
+            Assert.AreEqual(_result.Success, true);
         }
     }
 } 

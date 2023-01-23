@@ -10,7 +10,7 @@ namespace Todo.Domain.Tests.Command
         // Red, Green, Refactor
 
         private readonly CriarTarefaCommand _comandoInvalido = new CriarTarefaCommand("", DateTime.Now, "");
-        private readonly CriarTarefaCommand _comandoValido = new CriarTarefaCommand("Título da Tarefa", DateTime.Now, "andrebaltieri");
+        private readonly CriarTarefaCommand _comandoValido = new CriarTarefaCommand("Título da Tarefa", DateTime.Now, "danilosilva");
 
         public CriarTarefaCommandTests()
         {
