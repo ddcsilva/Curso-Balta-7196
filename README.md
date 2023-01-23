@@ -1,2 +1,1 @@
-# Curso_Balta_Todo_App_API_NET_Core_CQRS_EF
- 
+# Curso - Todo App: API com ASP.NET Core, CQRS e EF Core
