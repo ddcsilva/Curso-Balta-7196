@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Todo.Domain.Commands;
 using Todo.Domain.Handlers;
+using Todo.Domain.Tests.Repositories;
 
 namespace Todo.Domain.Tests.HandlerTests
 {
@@ -12,7 +13,7 @@ namespace Todo.Domain.Tests.HandlerTests
         public void Dado_Um_Comando_Invalido_Deve_Interromper_A_Execucao()
         {
             var command = new CriarTarefaCommand("", DateTime.Now, "");
-            var handler = new TodoHandler(null);
+            var handler = new TodoHandler(new FakeTodoRepository());
             Assert.Fail();
         }
 
@@ -22,4 +23,4 @@ namespace Todo.Domain.Tests.HandlerTests
             Assert.Fail();
         }
     }
-}
+} 
