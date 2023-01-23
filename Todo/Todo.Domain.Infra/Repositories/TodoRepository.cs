@@ -32,7 +32,9 @@ namespace Todo.Domain.Infra.Repositories
 
         public Tarefa BuscarPorId(Guid id, string usuario)
         {
-            throw new NotImplementedException();
+            return _context
+                .Tarefas
+                .FirstOrDefault(x => x.Id == id && x.Usuario == usuario);
         }
 
         public IEnumerable<Tarefa> RetornarTodas(string usuario)
@@ -45,17 +47,26 @@ namespace Todo.Domain.Infra.Repositories
 
         public IEnumerable<Tarefa> RetornarTodasConcluidas(string usuario)
         {
-            throw new NotImplementedException();
+            return _context.Tarefas
+                .AsNoTracking()
+                .Where(TarefaQueries.RetornarTodasConcluidas(usuario))
+                .OrderBy(x => x.Data);
         }
 
         public IEnumerable<Tarefa> RetornarTodasNaoConcluidas(string usuario)
         {
-            throw new NotImplementedException();
+            return _context.Tarefas
+                .AsNoTracking()
+                .Where(TarefaQueries.RetornarTodasNaoConcluidas(usuario))
+                .OrderBy(x => x.Data);
         }
 
         public IEnumerable<Tarefa> RetornarTodasPorPeriodo(string usuario, DateTime data, bool concluido)
         {
-            throw new NotImplementedException();
+            return _context.Tarefas
+                .AsNoTracking()
+                .Where(TarefaQueries.RetornarTodasPorPeriodo(usuario, data, concluido))
+                .OrderBy(x => x.Data);
         }
     }
 }

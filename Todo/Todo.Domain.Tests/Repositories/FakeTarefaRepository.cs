@@ -5,7 +5,7 @@ using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Tests.Repositories
 {
-    public class FakeTarefaRepository : ITarefaRepository
+    public class FakeTodoRepository : ITarefaRepository
     {
         public void Inserir(Tarefa tarefa)
         {
