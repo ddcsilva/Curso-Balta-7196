@@ -7,7 +7,7 @@ using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Handlers
 {
-    public class TodoHandler : Notifiable, IHandler<CriarTarefaCommand>, IHandler<AtualizarTarefaCommand>
+    public class TodoHandler : Notifiable, IHandler<CriarTarefaCommand>, IHandler<AtualizarTarefaCommand>, IHandler<MarcarComoConcluidaCommand>, IHandler<MarcarComoNaoConcluidaCommand>
     {
         private readonly ITodoRepository _repository;
 
@@ -50,7 +50,47 @@ namespace Todo.Domain.Handlers
             _repository.Atualizar(todo);
 
             // Retorna o resultado
-            return new GenericCommandResult(true, "Tarefa salva", todo);
+            return new GenericCommandResult(true, "Tarefa atualizada", todo);
+        }
+
+        public ICommandResult Handle(MarcarComoConcluidaCommand command)
+        {
+            // Fail Fast Validation
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+            // Recupera o TodoItem
+            var todo = _repository.BuscarPorId(command.Id, command.Usuario);
+
+            // Altera o estado
+            todo.MarcarComoConcluido();
+
+            // Salva no banco
+            _repository.Atualizar(todo);
+
+            // Retorna o resultado
+            return new GenericCommandResult(true, "Tarefa atualizada", todo);
+        }
+
+        public ICommandResult Handle(MarcarComoNaoConcluidaCommand command)
+        {
+            // Fail Fast Validation
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+            // Recupera o TodoItem
+            var todo = _repository.BuscarPorId(command.Id, command.Usuario);
+
+            // Altera o estado
+            todo.MarcarComoConcluido();
+
+            // Salva no banco
+            _repository.Atualizar(todo);
+
+            // Retorna o resultado
+            return new GenericCommandResult(true, "Tarefa atualizada", todo);
         }
     }
 }
