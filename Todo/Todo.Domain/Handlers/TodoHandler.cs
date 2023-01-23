@@ -24,7 +24,7 @@ namespace Todo.Domain.Handlers
                 return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
             // Gera a Tarefa
-            var tarefa = new Item(command.Titulo, command.Data, command.Usuario);
+            var tarefa = new Tarefa(command.Titulo, command.Data, command.Usuario);
 
             // Salva no banco
             _repository.Inserir(tarefa);

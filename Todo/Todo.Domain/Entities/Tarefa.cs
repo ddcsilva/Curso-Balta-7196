@@ -2,9 +2,9 @@
 
 namespace Todo.Domain.Entities
 {
-    public class Item : BaseEntity
+    public class Tarefa : BaseEntity
     {
-        public Item(string titulo, DateTime data, string usuario)
+        public Tarefa(string titulo, DateTime data, string usuario)
         {
             Titulo = titulo;
             Concluido = false;
