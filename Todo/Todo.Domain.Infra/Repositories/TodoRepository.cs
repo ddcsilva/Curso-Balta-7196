@@ -1,20 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Todo.Domain.Entities;
+using Todo.Domain.Infra.Contexts;
 using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Infra.Repositories
 {
     public class TodoRepository : ITodoRepository
     {
+        private readonly DataContext _context;
+
+        public TodoRepository(DataContext context)
+        {
+            _context = context;
+        }
+
         public void Inserir(Tarefa tarefa)
         {
-            throw new NotImplementedException();
+            _context.Tarefas.Add(tarefa);
+            _context.SaveChanges();
         }
 
         public void Atualizar(Tarefa tarefa)
         {
-            throw new NotImplementedException();
+            _context.Entry(tarefa).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public Tarefa BuscarPorId(Guid id, string usuario)
