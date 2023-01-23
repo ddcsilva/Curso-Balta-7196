@@ -21,12 +21,12 @@ namespace Todo.Domain.Queries
             return x => x.Usuario == usuario && x.Concluido == false;
         }
 
-        public static Expression<Func<TodoItem, bool>> RetornarTodasTarefasPorPeriodo(string usuario, DateTime data, bool concluido)
+        public static Expression<Func<Tarefa, bool>> RetornarTodasTarefasPorPeriodo(string usuario, DateTime data, bool concluido)
         {
             return x =>
-                x.User == usuario &&
-                x.Done == concluido &&
-                x.Date.Date == data.Date;
+                x.Usuario == usuario &&
+                x.Concluido == concluido &&
+                x.Data.Date == data.Date;
         }
     }
 }
