@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Todo.Domain.Commands;
 using Todo.Domain.Entities;
@@ -9,6 +11,7 @@ using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("v1/todos")]
     public class TodoController : ControllerBase
@@ -17,56 +20,63 @@ namespace Todo.Domain.Api.Controllers
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasTarefas([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodas("danilosilva");
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodas(usuario);
         }
 
         [Route("concluidas")]
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasConcluidas([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodasConcluidas("danilosilva");
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodasConcluidas(usuario);
         }
 
         [Route("nao-concluidas")]
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasNaoConcluidas([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodasNaoConcluidas("danilosilva");
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodasNaoConcluidas(usuario);
         }
 
         [Route("concluidas/hoje")]
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasConcluidasHoje([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodasPorPeriodo("danilosilva", DateTime.Now.Date, true);
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodasPorPeriodo(usuario, DateTime.Now.Date, true);
         }
 
         [Route("nao-concluidas/hoje")]
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasNaoConcluidasHoje([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodasPorPeriodo("danilosilva", DateTime.Now.Date, false);
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodasPorPeriodo(usuario, DateTime.Now.Date, false);
         }
 
         [Route("concluidas/amanha")]
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasConcluidasAmanha([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodasPorPeriodo("danilosilva", DateTime.Now.Date.AddDays(1), true);
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodasPorPeriodo(usuario, DateTime.Now.Date.AddDays(1), true);
         }
 
         [Route("nao-concluidas/amanha")]
         [HttpGet]
         public IEnumerable<Tarefa> RetornarTodasNaoConcluidasAmanha([FromServices] ITarefaRepository repository)
         {
-            return repository.RetornarTodasPorPeriodo("danilosilva", DateTime.Now.Date.AddDays(1), false);
+            var usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            return repository.RetornarTodasPorPeriodo(usuario, DateTime.Now.Date.AddDays(1), false);
         }
 
         [Route("")]
         [HttpPost]
         public GenericCommandResult CriarTarefa([FromBody] CriarTarefaCommand command, [FromServices] TarefaHandler handler)
         {
-            command.Usuario = "danilosilva";
+            command.Usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             return (GenericCommandResult)handler.Handle(command);
         }
 
@@ -74,7 +84,7 @@ namespace Todo.Domain.Api.Controllers
         [HttpPut]
         public GenericCommandResult AtualizarTarefa([FromBody] CriarTarefaCommand command, [FromServices] TarefaHandler handler)
         {
-            command.Usuario = "danilosilva";
+            command.Usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             return (GenericCommandResult)handler.Handle(command);
         }
 
@@ -82,7 +92,7 @@ namespace Todo.Domain.Api.Controllers
         [HttpPut]
         public GenericCommandResult MarcarComoConcluida([FromBody] MarcarComoConcluidaCommand command, [FromServices] TarefaHandler handler)
         {
-            command.Usuario = "danilosilva";
+            command.Usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             return (GenericCommandResult)handler.Handle(command);
         }
 
@@ -90,7 +100,7 @@ namespace Todo.Domain.Api.Controllers
         [HttpPut]
         public GenericCommandResult MarcarComoNaoConcluida([FromBody] MarcarComoNaoConcluidaCommand command, [FromServices] TarefaHandler handler)
         {
-            command.Usuario = "danilosilva";
+            command.Usuario = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             return (GenericCommandResult)handler.Handle(command);
         }
     }
